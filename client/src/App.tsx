@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Pages/Home';
 import Layout from './components/Layout';
+import SignInPage from './components/Pages/SignInPage';
+import SignUpPage from './components/Pages/SignUpPage';
 
 function App(): JSX.Element {
   return (
@@ -9,6 +11,13 @@ function App(): JSX.Element {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUpPage />}>
+            {' '}
+            signup
+          </Route>
+          <Route path="/signin" element={<SignInPage />}>
+            Signup
+          </Route>
         </Route>
       </Routes>
     </div>

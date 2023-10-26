@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import ThemeSwither from './ThemeSwither';
 
 export default function AppNavBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,9 +36,12 @@ export default function AppNavBar(): JSX.Element {
           <Box>Logo</Box>
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
             <NavLink to="/">Home</NavLink>
+            <NavLink to="/signin">signin</NavLink>
+            <NavLink to="/signup">signup</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
+          <ThemeSwither />
           <Menu>
             <MenuButton as={Button} rounded="full" variant="link" cursor="pointer" minW={0}>
               <Avatar

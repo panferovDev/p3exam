@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import GroupPart from '../UI/GroupPart';
 
 export default function Home(): JSX.Element {
   return (
-    <div>Home</div>
-  )
+    <div className="mt-5">
+      <GroupPart />
+    </div>
+  );
 }
