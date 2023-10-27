@@ -27,9 +27,6 @@ export default function SignInPage(): JSX.Element {
         >
           Sign In
         </Text>
-        <Text align="center" mb={4} color={useColorModeValue('gray.900', 'gray.100')}>
-          Already have an account? <Link color="blue.400">Log in</Link>
-        </Text>
 
         <VStack spacing={4}>
 
@@ -39,7 +36,6 @@ export default function SignInPage(): JSX.Element {
               type="email"
               placeholder="Email"
               bg={useColorModeValue('gray.100', 'gray.900')}
-              color="white"
             />
           </FormControl>
 
@@ -49,7 +45,6 @@ export default function SignInPage(): JSX.Element {
               type="password"
               placeholder="Password"
               bg={useColorModeValue('gray.100', 'gray.900')}
-              color="white"
             />
             <Text mt={1} color={useColorModeValue('gray.900', 'gray.100')}>
               At least 8 characters long

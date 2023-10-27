@@ -17,7 +17,7 @@ export default function AddStudent(): JSX.Element {
             <InputGroup>
               <Input type="tel"  placeholder="Добавить студента" />
               <InputRightElement width="5.5rem">
-                <Button h='2.3rem' color='teal' mr='0.1rem' type="submit" className="w-52" variant="outline">
+                <Button  color='blue.500' rounded="sm" mr='0.1rem' type="submit" className="w-52" variant="outline">
                   добавить
                 </Button>
               </InputRightElement>

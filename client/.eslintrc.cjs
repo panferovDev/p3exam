@@ -23,6 +23,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react-refresh', 'react', 'react-hooks'],
   rules: {
+    'import/prefer-default-export': 'off',
     'default-param-last': 'off',
     'no-void': 'off',
     'no-param-reassign': 'off',

@@ -35,9 +35,10 @@ export default function AppNavBar(): JSX.Element {
         <HStack spacing={8} alignItems="center">
           <Box>Logo</Box>
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/signin">signin</NavLink>
-            <NavLink to="/signup">signup</NavLink>
+            <NavLink to="/" className={({ isActive }) => isActive? 'underline' : ''}>Home</NavLink>
+            <NavLink to='/bad' className={({ isActive }) => isActive? 'underline' : ''}>bad page</NavLink>
+            <NavLink to="/signin" className={({ isActive }) => isActive? 'underline' : ''}>signin</NavLink>
+            <NavLink to="/signup" className={({ isActive }) => isActive? 'underline' : ''}>signup</NavLink>
           </HStack>
         </HStack>
         <Flex alignItems="center">
