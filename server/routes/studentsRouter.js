@@ -1,16 +1,16 @@
 const studentRouter = require('express').Router();
 const { Student } = require('../db/models');
 
-studentRouter.route('/group:id')
+studentRouter.route('/group/:id')
   .get(async (req, res) => {
-    const { id } = req.params();
+    const { id } = req.params;
     if (Number.isNaN(id)) {
-      res.sendStatus(401).json({ message: 'wrong group id' });
+      res.status(401).json({ message: 'wrong group id' });
     }
     try {
       const students = await Student.findAll({
         where: {
-          id,
+          groupId: id,
         },
       });
 
@@ -21,11 +21,33 @@ studentRouter.route('/group:id')
     }
   });
 
+studentRouter.route('/')
+  .post(async (req, res) => {
+    const { name, groupId } = req.body;
+    if (!name || !groupId) {
+      res.status(401).json({ message: 'wrong student data' });
+      return;
+    }
+
+    try {
+      const newStudent = await Student.create({
+        name,
+        groupId,
+      });
+
+      res.status(200).json(newStudent);
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+  });
+
 studentRouter.route('/:id')
   .delete(async (req, res) => {
-    const { id } = req.params();
+    const { id } = req.params;
     if (Number.isNaN(id)) {
-      res.sendStatus(401).json({ message: 'wrong group id' });
+      res.status(401).json({ message: 'wrong group id' });
+      return;
     }
 
     try {
@@ -34,7 +56,7 @@ studentRouter.route('/:id')
           id,
         },
       }));
-      res.sendStatus(200).json({ message: 'deleted' });
+      res.status(200).json({ message: 'deleted' });
     } catch (err) {
       console.log(err);
       res.sendStatus(500);

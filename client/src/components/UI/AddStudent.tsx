@@ -6,19 +6,36 @@ import {
   FormControl,
   InputGroup,
   InputRightElement,
+  useColorModeValue,
 } from '@chakra-ui/react';
+import { useStudentHandlers } from '../../hooks/useStudentHandlers';
 
-export default function AddStudent(): JSX.Element {
+export default function AddStudent(): JSX.Element | null {
+  const { submitStudentHandler } = useStudentHandlers();
+  
   return (
-    <div className="mt-8">
+    <div className="mt-3">
       <Stack gap={1}>
-        <form>
+        <form onSubmit={submitStudentHandler}>
           <FormControl id="student">
             <InputGroup>
-              <Input type="tel"  placeholder="Добавить студента" />
+              <Input
+                type="tel"
+                name="name"
+                placeholder="Добавить студента"
+                borderColor="gray.400"
+              />
               <InputRightElement width="5.5rem">
-                <Button  color='blue.500' rounded="sm" mr='0.1rem' type="submit" className="w-52" variant="outline">
-                  добавить
+                <Button
+                  disabled
+                  color={useColorModeValue('gray.600', 'teal')}
+                  rounded="sm"
+                  backgroundColor={useColorModeValue('gray.300', 'gray.700')}
+                  type="submit"
+                  className="w-52"
+                  variant="outline"
+                >
+                  ok
                 </Button>
               </InputRightElement>
             </InputGroup>

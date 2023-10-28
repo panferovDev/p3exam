@@ -5,8 +5,9 @@ function createRandomUser() {
     name: faker.person.fullName(),
   };
 }
-const users = faker.helpers.multiple(createRandomUser, {
-  count: 5,
+
+const getSudents = (num) => faker.helpers.multiple(createRandomUser, {
+  count: num,
 });
 
-console.log(users);
+module.exports = getSudents;

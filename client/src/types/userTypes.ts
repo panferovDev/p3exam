@@ -1,5 +1,5 @@
 export type UserSubmitType = {
-    name: string;
+    name?: string;
     password: string;
     email: string;
 };

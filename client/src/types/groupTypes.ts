@@ -1,6 +1,5 @@
 export type GroupType = {
-    id: number;
-    name: string;
-    img: string;
+  id: number;
+  name: string;
+  img: string;
 };
-

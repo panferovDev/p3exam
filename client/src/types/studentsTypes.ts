@@ -1,4 +1,4 @@
-export type StudenType = {
+export type StudentType = {
     id: number;
     groupId: number;
     name: string;

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
   IconButton,
   Button,
@@ -15,15 +14,20 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
+import { SlLogout } from 'react-icons/sl';
 import { NavLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import ThemeSwither from './ThemeSwither';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { logoutUserThunk } from '../../features/redux/thunkActions/userThunkActions';
 
 export default function AppNavBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userDadta = useAppSelector((state) => state.userData);
+  const dispatch = useAppDispatch();
 
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+    <Box bg={useColorModeValue('gray.100', 'gray.900')} rounded="lg" px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -33,30 +37,45 @@ export default function AppNavBar(): JSX.Element {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems="center">
-          <Box>Logo</Box>
+          <Box>
+            <span>EXAM</span>
+          </Box>
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <NavLink to="/" className={({ isActive }) => isActive? 'underline' : ''}>Home</NavLink>
-            <NavLink to='/bad' className={({ isActive }) => isActive? 'underline' : ''}>bad page</NavLink>
-            <NavLink to="/signin" className={({ isActive }) => isActive? 'underline' : ''}>signin</NavLink>
-            <NavLink to="/signup" className={({ isActive }) => isActive? 'underline' : ''}>signup</NavLink>
+            {userDadta.status !== 'success' ? (
+              <>
+                <NavLink to="/signin" className={({ isActive }) => (isActive ? 'underline' : '')}>
+                  signin
+                </NavLink>
+                <NavLink to="/signup" className={({ isActive }) => (isActive ? 'underline' : '')}>
+                  signup
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'underline' : '')}>
+                  Home
+                </NavLink>
+                <NavLink to="/bad" className={({ isActive }) => (isActive ? 'underline' : '')}>
+                  BadPage
+                </NavLink>
+              </>
+            )}
           </HStack>
         </HStack>
         <Flex alignItems="center">
           <ThemeSwither />
-          <Menu>
-            <MenuButton as={Button} rounded="full" variant="link" cursor="pointer" minW={0}>
-              <Avatar
-                size="sm"
-                src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-              />
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Link 1</MenuItem>
-              <MenuItem>Link 2</MenuItem>
-              <MenuDivider />
-              <MenuItem>Link 3</MenuItem>
-            </MenuList>
-          </Menu>
+          {userDadta.status === 'success' && (
+            <>
+              <span className="mx-5">Привет, {userDadta.user.name}</span>
+              <Button
+                onClick={() => void dispatch(logoutUserThunk())}
+                colorScheme="orange"
+                variant="outline"
+              >
+                <SlLogout />
+              </Button>
+            </>
+          )}
         </Flex>
       </Flex>
 
