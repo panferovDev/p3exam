@@ -8,6 +8,7 @@ import BadPracticePage from './components/Pages/BadPracticePage';
 import useUserCheck from './hooks/useCheckUser';
 import { useAppSelector } from './hooks/reduxHooks';
 import ProtectdedRouter from './components/hoks/ProtectdedRouter';
+import { ErrGlobalToast } from './hooks/useErr';
 
 function App(): JSX.Element {
   useUserCheck();
@@ -16,10 +17,12 @@ function App(): JSX.Element {
     <div className="container min-h-[100vh] md:mx-auto mx-5">
       <Routes>
         <Route element={<Layout />}>
-        <Route element={<ProtectdedRouter isAllowed={userStatus === 'success'} redirectTo="/signin" />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-        
+          <Route
+            element={<ProtectdedRouter isAllowed={userStatus === 'success'} redirectTo="/signin" />}
+          >
+            <Route path="/" element={<Home />} />
+          </Route>
+
           <Route path="/bad" element={<BadPracticePage />} />
 
           <Route element={<ProtectdedRouter isAllowed={userStatus !== 'success'} redirectTo="/" />}>
@@ -33,6 +36,7 @@ function App(): JSX.Element {
           </Route>
         </Route>
       </Routes>
+      <ErrGlobalToast />
     </div>
   );
 }

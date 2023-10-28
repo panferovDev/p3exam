@@ -3,15 +3,14 @@ import type { UserStateType } from '../../../types/userTypes';
 import {
   checkUserThunk,
   logoutUserThunk,
+  submitSigninThunk,
   submitSignupThunk,
 } from '../thunkActions/userThunkActions';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: { status: 'loading' } as UserStateType,
-  reducers: {
-    
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(checkUserThunk.pending, () => ({ status: 'loading' }));
@@ -20,12 +19,16 @@ const userSlice = createSlice({
       user: action.payload,
     }));
     builder.addCase(checkUserThunk.rejected, () => ({ status: 'idle' }));
-    builder.addCase(submitSignupThunk.pending, () => ({ status: 'loading' }));
     builder.addCase(submitSignupThunk.fulfilled, (_, action) => ({
       status: 'success',
       user: action.payload,
     }));
-    builder.addCase(submitSignupThunk.rejected, () => ({ status: 'idle' }));
+
+    builder.addCase(submitSigninThunk.fulfilled, (_, action) => ({
+      status: 'success',
+      user: action.payload,
+    }));
+
     builder.addCase(logoutUserThunk.fulfilled, () => ({ status: 'idle' }));
   },
 });

@@ -48,7 +48,7 @@ const useUserHandlers = (): {
       return;
     }
 
-    void dispatch(submitSigninThunk(formData));
+   void dispatch(submitSigninThunk(formData))
   };
 
   return { userSignUpHandler, userSignInHandler };
