@@ -33,7 +33,7 @@ userRouter.post('/signin', async (req, res) => {
       const user = await User.findOne({
         where: { email },
       });
-      if (!(await bcrypt.compare(password, user.password))) {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.sendStatus(401);
       }
 
